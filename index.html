@@ -4,44 +4,60 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mes cours · Karim Ryahi</title>
-<meta name="description" content="Cours, briefs et TP de ma formation Data Engineer, classés par thème.">
+<meta name="description" content="Cours, TP, briefs et quiz de ma formation Data Engineer.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<a class="skip" href="#liste">Aller au contenu</a>
+<a class="skip" href="#contenu">Aller au contenu</a>
 <div class="layout">
-  <aside class="side" id="side">
+  <aside class="side">
     <div class="brand">
       <p class="brand-name">Carnet de cours</p>
       <p class="brand-sub">Formation Data Engineer</p>
     </div>
+    <nav class="sections" aria-label="Parties du site">
+      <a href="#cours" data-view="cours">Cours</a>
+      <a href="#quiz" data-view="quiz">Quiz</a>
+    </nav>
     <nav aria-label="Thèmes" id="themes" class="themes"></nav>
     <button class="mode" id="mode" type="button" aria-label="Changer le thème clair ou sombre">Mode sombre</button>
   </aside>
 
-  <main class="main">
-    <header class="head">
-      <h1>Mes cours, TP et briefs</h1>
-      <p class="lede" id="stats"></p>
-      <div class="tools">
-        <label class="search">
-          <span class="sr">Rechercher</span>
-          <input id="q" type="search" placeholder="Rechercher un cours, un mot-clé…" autocomplete="off">
-        </label>
-        <div class="seg" role="group" aria-label="Type de contenu" id="types">
-          <button type="button" data-type="all" aria-pressed="true">Tout</button>
-          <button type="button" data-type="tp" aria-pressed="false">TP</button>
-          <button type="button" data-type="brief" aria-pressed="false">Briefs</button>
+  <main class="main" id="contenu">
+    <section id="view-cours">
+      <header class="head">
+        <h1>Mes cours, TP et briefs</h1>
+        <p class="lede" id="stats"></p>
+        <div class="tools">
+          <label class="search">
+            <span class="sr">Rechercher</span>
+            <input id="q" type="search" placeholder="Rechercher un cours, un mot-clé…" autocomplete="off">
+          </label>
+          <div class="seg" role="group" aria-label="Type de contenu" id="types">
+            <button type="button" data-type="all" aria-pressed="true">Tout</button>
+            <button type="button" data-type="tp" aria-pressed="false">TP</button>
+            <button type="button" data-type="brief" aria-pressed="false">Briefs</button>
+          </div>
         </div>
-      </div>
-    </header>
-    <div id="liste" aria-live="polite"></div>
-    <footer class="foot">Site statique hébergé sur GitHub Pages. Pour ajouter un cours, modifie la liste dans <code>app.js</code>.</footer>
+      </header>
+      <div id="liste" aria-live="polite"></div>
+    </section>
+
+    <section id="view-quiz" hidden>
+      <header class="head">
+        <h1>Quiz</h1>
+        <p class="lede">Teste-toi sur chaque TP. Tu vois la correction après chaque réponse, et ton meilleur score est gardé dans ce navigateur.</p>
+      </header>
+      <div id="quiz-root" aria-live="polite"></div>
+    </section>
+
+    <footer class="foot">Site statique hébergé sur GitHub Pages. Les cours se modifient dans <code>app.js</code>, les quiz dans <code>quiz.js</code>.</footer>
   </main>
 </div>
 <script src="app.js"></script>
+<script src="quiz.js"></script>
 </body>
 </html>

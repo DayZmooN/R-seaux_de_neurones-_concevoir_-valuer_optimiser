@@ -8,12 +8,12 @@ const COURS = [
   {type:"tp",theme:"Deep Learning",title:"TP5 · Régularisation",desc:"Dropout, arrêt précoce et marge de bruit du test.",tags:["dropout","early stopping"],files:[{l:"Notebook",u:"cours/tp5_regularisation.ipynb"}]},
   {type:"tp",theme:"Deep Learning",title:"TP6 · Hyperparamètres et compression",desc:"Recherche d'hyperparamètres avec Keras Tuner et compression du modèle.",tags:["keras-tuner","compression"],files:[{l:"Notebook",u:"cours/tp6_hyperparametres_compression.ipynb"}]},
   {type:"tp",theme:"Deep Learning",title:"TP7 · Texte et NLP",desc:"Classer des textes de films d'horreur et de comédie.",tags:["NLP","spaCy"],files:[{l:"Notebook",u:"cours/tp7_texte_nlp.ipynb"},{l:"Données CSV",u:"cours/textes_films_horreur_comedie.csv"}]},
-  {type:"tp",theme:"Deep Learning",title:"TP · Optimiser votre réseau",desc:"Compte rendu de 1 à 2 pages avec tableau de synthèse et interprétation.",tags:["Keras","optimisation"],files:[{l:"Notebook",u:"cours/c-optimiser.ipynb"}]},
+  {type:"tp",theme:"Deep Learning",title:"TP · Optimiser votre réseau",desc:"Compte rendu de 1 à 2 pages avec tableau de synthèse et interprétation.",tags:["Keras","optimisation"],files:[]},
   {type:"brief",theme:"Deep Learning",title:"Défi d'adaptation · Moons",desc:"Réseau de neurones contre régression logistique, avec marge de bruit.",tags:["défi","make_moons"],files:[{l:"Notebook",u:"cours/defi_moons_karim.ipynb"},{l:"Énoncé PDF",u:"cours/enonce-defi-adaptation.pdf"}]},
-  {type:"brief",theme:"Data Engineering",title:"TradeCorp Data Platform · Jalon 3",desc:"Orchestration des pipelines avec Airflow.",tags:["Airflow","orchestration"],files:[{l:"Ouvrir",u:"cours/tradecorp-jalon3/"}]},
-  {type:"brief",theme:"Data Engineering",title:"StreamVault · Rapport technique Brief 2",desc:"Coûts, DCT, sécurité et schéma final (Jalon 3).",tags:["architecture","sécurité"],files:[{l:"Ouvrir",u:"cours/streamvault-brief2/"}]},
-  {type:"brief",theme:"Gestion de projet",title:"StreamVault · Appel d'offres",desc:"Dossier de réponse en 14 parties, projet d'équipe.",tags:["appel d'offres","équipe"],files:[{l:"Ouvrir",u:"cours/streamvault-appel-offres/"}]},
-  {type:"brief",theme:"Gestion de projet",title:"Veille · Compétences stratégiques",desc:"Pilotage, stratégie, gouvernance et relation client.",tags:["veille","gouvernance"],files:[{l:"Ouvrir",u:"cours/veille/"}]}
+  {type:"brief",theme:"Data Engineering",title:"TradeCorp Data Platform · Jalon 3",desc:"Orchestration des pipelines avec Airflow.",tags:["Airflow","orchestration"],files:[]},
+  {type:"brief",theme:"Data Engineering",title:"StreamVault · Rapport technique Brief 2",desc:"Coûts, DCT, sécurité et schéma final (Jalon 3).",tags:["architecture","sécurité"],files:[]},
+  {type:"brief",theme:"Gestion de projet",title:"StreamVault · Appel d'offres",desc:"Dossier de réponse en 14 parties, projet d'équipe.",tags:["appel d'offres","équipe"],files:[]},
+  {type:"brief",theme:"Gestion de projet",title:"Veille · Compétences stratégiques",desc:"Pilotage, stratégie, gouvernance et relation client.",tags:["veille","gouvernance"],files:[]}
 ];
 
 const $ = s => document.querySelector(s);
@@ -27,6 +27,13 @@ function renderThemes(){
     const n = t === "Tous" ? COURS.length : COURS.filter(c => c.theme === t).length;
     return `<button type="button" data-theme="${esc(t)}" aria-pressed="${t === state.theme}">${esc(t)}<span class="n">${n}</span></button>`;
   }).join("");
+}
+
+function links(files){
+  if(!files.length) return `<span class="soon">Bientôt disponible</span>`;
+  return files.map(f => f.u.endsWith(".ipynb")
+    ? `<a href="${esc(f.u.replace(".ipynb",".html"))}">Lire</a><a href="${esc(f.u)}" download>Télécharger .ipynb</a>`
+    : `<a href="${esc(f.u)}">${esc(f.l)}</a>`).join("");
 }
 
 function render(){
@@ -43,7 +50,7 @@ function render(){
         <span class="kind">${c.type === "tp" ? "TP" : "Brief"}</span>
         <h3>${esc(c.title)}</h3><p>${esc(c.desc)}</p>
         <div class="tags">${c.tags.map(t => `<span>${esc(t)}</span>`).join("")}</div>
-        <div class="links">${c.files.map(f => `<a href="${esc(f.u)}">${esc(f.l)}</a>`).join("")}</div>
+        <div class="links">${links(c.files)}</div>
       </div></article>`).join("")}
     </section>`).join("")
     : `<p class="empty">Aucun résultat. Essaie un autre mot-clé ou choisis « Tous » dans les thèmes.</p>`;

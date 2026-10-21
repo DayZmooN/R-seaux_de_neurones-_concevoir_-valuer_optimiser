@@ -3,3 +3,6 @@ scikit-learn
 pandas
 tensorflow
 matplotlib
+keras-tuner 
+tensorboard
+spacy

@@ -67,6 +67,7 @@ a{color:inherit}
 :root[data-theme="dark"] .links a:first-child{color:#0f1626}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .links a:first-child{color:#0f1626}}
 .links a:hover{filter:brightness(1.1)}
+.soon{font-size:.9rem;color:var(--muted);font-style:italic}
 .empty{padding:2rem;border:1px dashed var(--line);border-radius:var(--r);color:var(--muted)}
 .foot{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
 
